@@ -5,12 +5,12 @@ function submitIssue(e) {
   const description = getInputValue('issueDescription');
   const severity = getInputValue('issueSeverity');
   const assignedTo = getInputValue('issueAssignedTo');
-  const id = Math.floor(Math.random()*100000000) + '';
+  const id = Math.floor(Math.random() * 100000000) + '';
   const status = 'Open';
 
   const issue = { id, description, severity, assignedTo, status };
   let issues = [];
-  if (localStorage.getItem('issues')){
+  if (localStorage.getItem('issues')) {
     issues = JSON.parse(localStorage.getItem('issues'));
   }
   issues.push(issue);
@@ -32,7 +32,7 @@ const closeIssue = id => {
 
 const deleteIssue = id => {
   const issues = JSON.parse(localStorage.getItem('issues'));
-  const remainingIssues = issues.filter(issue => Number(issue.id) !== id )
+  const remainingIssues = issues.filter(issue => Number(issue.id) !== id)
   localStorage.setItem('issues', JSON.stringify(remainingIssues));
   fetchIssues(remainingIssues);
 }
@@ -43,9 +43,9 @@ const fetchIssues = issues => {
   issuesList.innerHTML = '';
 
   for (var i = 0; i < issue.length; i++) {
-    const {id, description, severity, assignedTo, status} = issue[i];
+    const { id, description, severity, assignedTo, status } = issue[i];
 
-    issuesList.innerHTML +=   `<div class="well">
+    issuesList.innerHTML += `<div class="well">
                                 <h6>Issue ID: ${id} </h6>
                                 <p><span class="label label-info"> ${status} </span></p>
                                 <h3> ${description} </h3>
