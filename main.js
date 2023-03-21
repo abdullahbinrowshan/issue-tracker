@@ -42,7 +42,7 @@ const fetchIssues = issues => {
   const issuesList = document.getElementById('issuesList');
   issuesList.innerHTML = '';
 
-  for (var i = 0; i < issue.length ? issue.length : 0; i++) {
+  for (var i = 0; i < issue?.length; i++) {
     const { id, description, severity, assignedTo, status } = issue[i];
 
     issuesList.innerHTML += `<div class="well">
