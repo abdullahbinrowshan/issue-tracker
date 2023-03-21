@@ -17,35 +17,33 @@ function submitIssue(e) {
   localStorage.setItem('issues', JSON.stringify(issues));
 
   document.getElementById('issueInputForm').reset();
-  fetchIssues();
+  fetchIssues(issues);
   e.preventDefault();
 }
 
 const closeIssue = id => {
   const issues = JSON.parse(localStorage.getItem('issues'));
-  // console.log(typeof id);
-  // console.log(typeof issues[0].id);
   const currentIssue = issues.find(issue => Number(issue.id) === id);
   currentIssue.status = 'Closed';
   console.log(currentIssue);
   localStorage.setItem('issues', JSON.stringify(issues));
-  fetchIssues();
+  fetchIssues(issues);
 }
 
 const deleteIssue = id => {
   const issues = JSON.parse(localStorage.getItem('issues'));
   const remainingIssues = issues.filter(issue => Number(issue.id) !== id )
   localStorage.setItem('issues', JSON.stringify(remainingIssues));
-  fetchIssues();
+  fetchIssues(remainingIssues);
 }
 
-const fetchIssues = () => {
-  const issues = JSON.parse(localStorage.getItem('issues'));
+const fetchIssues = issues => {
+  const issue = issues;
   const issuesList = document.getElementById('issuesList');
   issuesList.innerHTML = '';
 
-  for (var i = 0; i < issues.length; i++) {
-    const {id, description, severity, assignedTo, status} = issues[i];
+  for (var i = 0; i < issue.length; i++) {
+    const {id, description, severity, assignedTo, status} = issue[i];
 
     issuesList.innerHTML +=   `<div class="well">
                                 <h6>Issue ID: ${id} </h6>
